@@ -1,0 +1,56 @@
+<h1>Editar um usuario:</h1>
+
+<form action="/users/update" method="POST" class="form">
+    <input type="hidder" value="{{user.id}}">
+    <div class="form-control">
+        <label for="name">Nome:</label>
+        <input type="text" name="name" value="{{user.name}}">
+    </div>
+    <div class="form-control">
+        <label for="occupation">Ocupaçã:</label>
+        <input type="text" name="occupation" value="{{user.occupation}}">
+    </div>
+    <div class="form-control form-checkbox">
+        {{#if user.newsletter}}
+            <input type="checkbox" name="newsletter" value="{{user.newsletter}}" checked>
+        {{else}}
+            <input type="checkbox" name="newsletter" value="{{user.newsletter}}">
+        {{/if}}
+        <label for="newsletter">Enviar promoções:</label>      
+    </div>
+    <input type="submit" value="Editar">
+</form>
+<div class="adress-container">
+    <h2>Adicionar endereço</h2>
+    <form action="/adress/create" method="post">
+        <input type="hidden" name="UserId" value="{{user.id}}">
+        <div class="form-control">
+            <label for="street">Rua</label>
+            <input type="text" name="street">
+        </div>
+         <div class="form-control">
+            <label for="number">Numero</label>
+            <input type="text" name="number">
+        </div>
+         <div class="form-control">
+            <label for="city">Cidade</label>
+            <input type="text" name="city">
+        </div>
+        <input type="submit" value="Incluir Endereço">
+    </form>
+</div>
+<div class="list-adress">
+    <h2>Lista de Endereços</h2>
+    {{#each user.Adresses}}
+    <div>#{{this.id}}
+        - {{this.street}}
+        - {{this.number}}
+        - {{this.city}}
+        <form action="/adress/delete" method="POST">
+            <input type="hidden" name="UserId" value="{{user.UserId}}">
+            <input type="hidden" name="id" value="{{this.id}}">
+            <input type="submit" value="Deletar Endereço">
+        </form>
+    </div>
+    {{/each}}
+</div>

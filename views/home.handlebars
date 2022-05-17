@@ -1,0 +1,28 @@
+<h1>Olá sequilize</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Profissão</th>
+        <th>Receber newsletter?</th>
+        <th>Acessar usuarios</th>
+    </tr>
+    </thead>
+    <tbody>
+        {{#each users}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.occupation}}</td>
+                <td{{this.newsletter}}></td>
+                <td><a href="/users/{{this.id}}">ver detalhers</a></td>
+                <td><a href="/users/edit/{{this.id}}">Editar</a></td>
+                <td>
+                    <form action="/users/delete" method="POST">
+                        <input type="hidden" value="{{this.id}}">
+                        <input type="submit" value="Apagar">
+                    </form>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
